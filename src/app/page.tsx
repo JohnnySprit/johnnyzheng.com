@@ -1,10 +1,9 @@
-import Link from "next/link";
 import { Navbar } from "@/components/layout/NavBar";
 import { PhotoRail } from "@/components/layout/PhotoRail";
 import { Analytics } from "@vercel/analytics/next";
 import { PROJECTS } from "@/data/projects";
 import { WORK } from "@/data/work";
-import { INTERESTS } from "@/data/interests";
+import { COLLECTIONS } from "@/data/collections";
 
 const sectionClass = "py-12 sm:py-16";
 const headingClass = "mb-6 text-2xl font-semibold sm:text-3xl";
@@ -19,7 +18,7 @@ export default function Home() {
 
           <div className="mb-6 flex items-center justify-between">
             <div className="relative inline-block">
-              <h1 className="relative text-4xl italic font-bold hover:opacity-90 text-[var(--name-color)] hover:not-italic">
+              <h1 className="relative text-4xl italic font-bold hover:opacity-80 text-[var(--name-color)] hover:not-italic">
                 johnny zheng
               </h1>
             </div>
@@ -136,12 +135,54 @@ export default function Home() {
               ))}
             </div>
           </section>
-          <section id="interests" className={sectionClass}>
-            <h2 className={headingClass}>interests</h2>
-            <p className="text-sm text-[var(--text-secondary)]">
-              interests.
-            </p>
+
+          <section id="collections" className={sectionClass}>
+            <h2 className={headingClass}>collections</h2>
+            <div>
+              {COLLECTIONS.map((collection) => {
+                const { title, blurb, ...categories } = collection;
+
+                return (
+                  <article
+                    key={title}
+                    tabIndex={0}
+                    className="group cursor-pointer border-l border-transparent py-4 pl-4 outline-none transition-colors hover:border-[var(--text-primary)] focus:border-[var(--text-primary)]"
+                  >
+                    <div className="flex items-baseline justify-between gap-4">
+                      <h3 className="font-display text-xl text-[var(--text-primary)]">
+                        {title}
+                      </h3>
+                      <span
+                        aria-hidden
+                        className="text-md text-[var(--text-muted)] transition-transform duration-300 ease-out group-focus:rotate-90"
+                      >
+                        &gt;
+                      </span>
+                    </div>
+                    <p className="mt-1 text-md italic text-[var(--text-secondary)]">
+                      {blurb}
+                    </p>
+
+                    <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out group-focus:grid-rows-[1fr]">
+                      <div className="overflow-hidden">
+                        <div className="mt-3 space-y-2 opacity-0 transition-opacity duration-300 ease-out group-focus:opacity-100">
+                          {Object.entries(categories).map(([category, items]) => (
+                            <div key={category}>
+                              <p className="text-xs text-[var(--text-muted)]">{category}</p>
+                              <p className="text-sm text-[var(--text-secondary)]">
+                                {(items as string[]).join(", ")}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
           </section>
+
         </div>
         <PhotoRail />
       </div>

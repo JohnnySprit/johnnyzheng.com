@@ -20,7 +20,7 @@ export function PhotoRail() {
                 key={`${copy}-${shot.src}`}
                 src={shot.src}
                 alt=""
-                className="aspect-[3/4] w-full shrink-0 object-cover bg-[var(--bg-secondary)]"
+                className="aspect-[3/4] w-full shrink-0 object-cover bg-[var(--bg-secondary)] hover:opacity-50 transition-opacity duration-400"
               />
             ))}
           </div>

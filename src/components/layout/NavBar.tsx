@@ -1,12 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 const LINKS = [
   { href: "/#work", label: "work" },
   { href: "/#projects", label: "projects" },
-  { href: "/#interests", label: "interests" },
+  { href: "/#collections", label: "collections" },
 ];
 
 export function Navbar() {
